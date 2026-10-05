@@ -25,6 +25,6 @@ Each folder has its own README with install steps, a `studio-ready` folder of sc
 
 ## Licence and credit
 
-GPL-3.0, with one added term: keep the notice and credit **Doloss** with a link to this repository. The full wording is in [`NOTICE`](NOTICE) and [`LICENSE`](LICENSE).
+GPL-3.0, with one added term: keep the notice and credit **ForeverDolo** with a link to this repository. The full wording is in [`NOTICE`](NOTICE) and [`LICENSE`](LICENSE).
 
 In short: you may use and change this, including in a game you earn from, as long as you credit the author and publish the source of anything you distribute that includes it.
