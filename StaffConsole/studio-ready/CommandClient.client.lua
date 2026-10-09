@@ -286,7 +286,6 @@ end
 input:GetPropertyChangedSignal("Text"):Connect(function()
 	if input.Text == ";" then
 		input.Text = ""
-		setOpen(false)
 		return
 	end
 	if #input.Text > 350 then
@@ -304,7 +303,10 @@ input.FocusLost:Connect(function(enterPressed)
 end)
 submit.Activated:Connect(function() task.spawn(run) end)
 UIS.InputBegan:Connect(function(event, processed)
-	if event.KeyCode == Enum.KeyCode.Semicolon and not processed and not UIS:GetFocusedTextBox() then
+	if event.KeyCode ~= Enum.KeyCode.Semicolon then return end
+	local focused = UIS:GetFocusedTextBox()
+	local emptyConsole = focused == input and (input.Text == "" or input.Text == ";")
+	if emptyConsole or (not focused and not processed) then
 		setOpen(not opened)
 	end
 end)
