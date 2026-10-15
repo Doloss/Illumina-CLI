@@ -15,7 +15,9 @@ A dark glass UI kit for Roblox: translucent panels with a blurred world behind t
 2. Inside that ModuleScript, add seven **ModuleScripts** named `Config`, `Theme`, `Kit`, `Controls`, `Panel`, `Dock` and `Tabs`, and paste the matching file into each.
 3. To see it working, add a **LocalScript** named `IlluminaDemo` in `StarterPlayer.StarterPlayerScripts` and paste `IlluminaDemo.lua` into it. Press Play and click the "UI" tile on the left. Delete this script once the game has its own screens.
 
-Illumina needs nothing else in the place. It is client-side only: it creates no remotes and never talks to the server.
+4. For a sword hotbar, add a **LocalScript** named `Hotbar` in `StarterPlayer.StarterPlayerScripts` and paste `Hotbar.lua` into it. See [Hotbar](#hotbar).
+
+Illumina needs nothing else in the place. It is client-side only: it creates no remotes. The only server contact is the optional one in [Hotbar](#hotbar), and only when the game provides the remotes.
 
 ## Settings
 
@@ -64,6 +66,25 @@ local Theme, Kit, Controls, Panel, Dock, Tabs = Illumina.Theme, Illumina.Kit, Il
 - Other parts: `Kit.switch`, `Kit.input`, `Kit.badge`, `Kit.avatar`, `Kit.head`, `Kit.label`, `Kit.frame`, `Kit.scroll`.
 - Motion: `Kit.spring(instance, property, goal, Theme.Spring.release)` for a number property, `Kit.tween`, `Kit.countTo(label, from, to, format)`, `Kit.stagger(canvasGroup, index)`.
 - Layout helpers: `Kit.new`, `Kit.corner`, `Kit.stroke`, `Kit.pad`, `Kit.list`, `Kit.clear`.
+
+## Hotbar
+
+`Hotbar` is a solid HUD bar of sword slots at the bottom of the screen. A number key or a tap puts that slot's sword in the hand, and the same key puts it away. The held sword's slot gets an accent outline.
+
+Settings at the top of the script:
+
+| Setting | What it does |
+|---|---|
+| `ICONS` | Tool name to image id. A tool without one shows its initials, so `DarkHeartSword` shows "DH". |
+| `SLOTS` | How many slots the bar shows. Keys 1 to 9 match the first nine. |
+| `HIDE_ROBLOX_BACKPACK` | `true` turns off Roblox's own backpack bar, which this replaces. |
+
+**Where the swords come from:**
+- **With no server code**, slot 1 shows the sword in the player's hand, else the first tool in their Backpack. Nothing else is needed.
+- **A game with an inventory** can fill the slots from the server. Put a RemoteFunction named `GetInventory` and a RemoteEvent named `InventoryUpdated` in `ReplicatedStorage`.
+  - `GetInventory` returns `{ slots = { "SwordName", ... } }`.
+  - `InventoryUpdated:FireClient(player, nil, slots)` sends a change, and the slots that changed pulse.
+  - Once the server has answered, the Backpack fallback stops. The slot names must match Tool names in the player's Backpack.
 
 ## Things to know
 

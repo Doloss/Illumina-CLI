@@ -15,6 +15,7 @@ Each folder has its own README with install steps, a `studio-ready` folder of sc
 - **Dock**: a solid column of tiles on the left edge that open panels.
 - **Tabs, Controls, Kit**: tabs with a sliding underline, grouped setting rows, switches, sliders, segmented choices, buttons, badges, inputs and dialogs.
 - **Config**: accent colour, font family, and world blur on or off.
+- **Hotbar**: a solid bar of sword slots at the bottom, number keys to hold a sword. It works from the Backpack on its own, or takes its slots from the server.
 - `IlluminaDemo` shows every part in one panel. `SettingsUI` is an example settings screen built from a single table.
 
 ## Staff console
